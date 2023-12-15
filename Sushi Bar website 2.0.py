@@ -1,0 +1,314 @@
+array1 = []
+def add_food_to_list1(value1):
+    array1.append(value1)
+def print_array1():
+    for value1 in array1:
+        print(value1)
+
+array2 = []
+def add_food_to_list2(value2):
+    array2.append(value2)
+def print_array2():
+    for value2 in array2:
+        print(value2)
+
+name_of_restarant="Sushi market"
+print("Приветствуем в",name_of_restarant)
+polzvatel=str(input("Введите имя пользователя : "))
+parol1=int(input("Введите пароль пользователя : "))
+print("Пользаватель :",polzvatel)
+print("Вошел в систему")
+sum_of_zakaz=0
+korzina=0
+
+while True:
+    while True:
+        kategoria=int(input("Какую категорию выберите (1-Роллы, 2-суши, 3-закуски(онигири), 4-напитки, 5-дополнительно) : "))
+        if kategoria==1:
+            print("Роллы:")
+            print("Филадельфия 600р. (8шт.,1шт.= 80г.)")#1
+            print("Калифорния 460р. (8шт.1шт.=70г.)")#2
+            print("Дракон 700р. (8шт.1шт.= 75г.)")#3
+            print("Лава 350р. (8шт.)")#4
+            print("Запеченые с крабом 660р. (8шт.)")#5
+            print("Темпура маки императорский 830р. (8шт.,1шт.= 80г.)")#6
+            print("Фиш роллы 390р. (8шт.1шт.=70г.)")#7
+            print("Филадельфия блек эдишен 1050р. (8шт.1шт.= 75г.)")#8
+            print("Инь-Янь 850р. (8шт.)")#9
+            print("Темпура с тунцом 660р. (8шт.)")#10
+            print("С крабом и криветкой 660р. (8шт.)")#11
+            print("Тануки 660р. (8шт.)")#12
+            rolls=str(input("Какой хотите ролл? "))
+            if rolls =="Филадельфия":
+                sum_of_zakaz=sum_of_zakaz+600
+                korzina=korzina+1
+                add_food_to_list1(600)
+            elif rolls =="Калифорния":
+                sum_of_zakaz=sum_of_zakaz+460
+                korzina=korzina+1
+                add_food_to_list1(460)
+            elif rolls =="Дракон":
+                sum_of_zakaz=sum_of_zakaz+700
+                korzina=korzina+1
+                add_food_to_list1(700)
+            elif rolls =="Лава":
+                sum_of_zakaz=sum_of_zakaz+350
+                korzina=korzina+1
+                add_food_to_list1(350)
+            elif rolls =="Запеченые с крабом":
+                sum_of_zakaz=sum_of_zakaz+660
+                korzina=korzina+1
+                add_food_to_list1(460)
+            elif rolls =="Темпура маки императорский":
+                sum_of_zakaz=sum_of_zakaz+830
+                korzina=korzina+1
+                add_food_to_list1(830)
+            elif rolls =="Фиш роллы":
+                sum_of_zakaz=sum_of_zakaz+390
+                korzina=korzina+1
+                add_food_to_list1(390)
+            elif rolls =="Филадельфия блек эдишен":
+                sum_of_zakaz=sum_of_zakaz+1050
+                korzina=korzina+1
+                add_food_to_list1(1050)
+            elif rolls =="Инь-Янь":
+                sum_of_zakaz=sum_of_zakaz+850
+                korzina=korzina+1
+                add_food_to_list1(850)
+            elif rolls =="Темпура с тунцом":
+                sum_of_zakaz=sum_of_zakaz+660
+                korzina=korzina+1
+                add_food_to_list1(660)
+            elif rolls =="С крабом и криветкой":
+                sum_of_zakaz=sum_of_zakaz+660
+                korzina=korzina+1
+                add_food_to_list1(660)
+            elif rolls =="Тануки":
+                sum_of_zakaz=sum_of_zakaz+660
+                korzina=korzina+1
+                add_food_to_list1(660)
+            else:
+                print("Не праильно введено название ролла. ХЗ")
+            add_food_to_list2(rolls)
+        elif kategoria==2:
+            print("Суши:")
+            print("Сяке 320р. (4шт.,1шт.= 35г.)")#1
+            print("Унаги 320р. (4шт.,1шт.=35г.)")#2
+            print("Чука 240р. (4шт.,1шт.= 35г.)")#3
+            print("Кани спайси 240р. (4шт.,1шт.= 40г.)")#4
+            print("Унаги спайси 640р. (4шт.,1шт.= 40г.)")#5
+            print("Марузаки спайси 240р. (4шт.,1шт.= 40г.)")#6
+            print("Сяке спайси 640р. (4шт.,1шт.=40г.)")#7
+            sushi=str(input("Какие хотите суши? "))
+            if sushi =="Сяке":
+                sum_of_zakaz=sum_of_zakaz+320
+                korzina=korzina+1
+                add_food_to_list1(320)
+            elif sushi =="Унаги":
+                sum_of_zakaz=sum_of_zakaz+320
+                korzina=korzina+1
+                add_food_to_list1(320)
+            elif sushi =="Чука":
+                sum_of_zakaz=sum_of_zakaz+240
+                korzina=korzina+1
+                add_food_to_list1(240)
+            elif sushi =="Кани спайси":
+                sum_of_zakaz=sum_of_zakaz+240
+                korzina=korzina+1
+                add_food_to_list1(240)
+            elif sushi =="Унаги спайси":
+                sum_of_zakaz=sum_of_zakaz+640
+                korzina=korzina+1
+                add_food_to_list1(640)
+            elif sushi =="Марузаки спайси":
+                sum_of_zakaz=sum_of_zakaz+240
+                korzina=korzina+1
+                add_food_to_list1(240)
+            elif sushi =="Сяке спайси":
+                sum_of_zakaz=sum_of_zakaz+640
+                korzina=korzina+1
+                add_food_to_list1(640)
+            else:
+                print("Не праильно введено название суши. ХЗ")
+            add_food_to_list2(sushi)
+        elif kategoria==3:
+            print("Онигири:")
+            print("С лососем 140р. (4шт.,146г.)")#1
+            print("С лососем терияки 140. (4шт.,120г.)")#2
+            print("С курицей 115р. (4шт.,154г.)")#3
+            print("С криветкой и крабом 140р. (1шт., 140г.)")#4
+            onigiri=str(input("Какой хотите онигири? "))
+            if onigiri =="С лососем":
+                sum_of_zakaz=sum_of_zakaz+140
+                korzina=korzina+1
+                add_food_to_list1(140)
+            elif onigiri =="С лососем терияки":
+                sum_of_zakaz=sum_of_zakaz+140
+                korzina=korzina+1
+                add_food_to_list1(140)
+            elif onigiri =="С курицей":
+                sum_of_zakaz=sum_of_zakaz+115
+                korzina=korzina+1
+                add_food_to_list1(115)
+            elif onigiri =="С криветкой и крабом":
+                sum_of_zakaz=sum_of_zakaz+140
+                korzina=korzina+1
+                add_food_to_list1(140)
+            else:
+                print("Не праильно введено название онигири. ХЗ")
+            add_food_to_list2(onigiri)
+        elif kategoria==4:
+            print("Напитки:")
+            print("Кола Добрый 44р. (0.33л.)")#1
+            print("Кола Добрый 50р. (0.5л.)")#2
+            print("Кола Добрый 60р. (1л.)")#3
+            print("Кола Добрый 120р. (2л.)")#4
+            print("Морс клюквенный 110р. (0.5л.)")#5
+            print("Морс облепиховый 110р. (0.5л.)")#6
+            print("Морс из черной смородины 110р. (0.5л.)")#7
+            print("Сок добрый Мульти Фрукт 210р. (2л.)")#8
+            print("Сок добрый Яблочный 230р. (2л.)")#9
+            print("Сок добрый Томатный 230р. (2л.)")#10
+            print("Чай черный Липтон 50р. (0.5л.)")#11
+            print("Чай зеленый Липтон 50р. (0.5л.)")#12
+            print("Чай черный Липтон 120р. (1л.)")#13
+            print("Чай зеленый Липтон 120р. (1л.)")#14
+            print("Без алкоголя!!! (осуждаем)")#15
+            napitki=str(input("Какой хотите напиток? "))
+            if napitki =="Кола Добрый 0.33":
+                sum_of_zakaz=sum_of_zakaz+44
+                korzina=korzina+1
+                add_food_to_list1(44)
+            elif napitki =="Кола Добрый 0.5":
+                sum_of_zakaz=sum_of_zakaz+50
+                korzina=korzina+1
+                add_food_to_list1(50)
+            elif napitki =="Кола Добрый 1":
+                sum_of_zakaz=sum_of_zakaz+60
+                korzina=korzina+1
+                add_food_to_list1(60)
+            elif napitki =="Кола Добрый 2":
+                sum_of_zakaz=sum_of_zakaz+120
+                korzina=korzina+1
+                add_food_to_list1(120)
+            elif napitki =="Морс клюквенный":
+                sum_of_zakaz=sum_of_zakaz+110
+                korzina=korzina+1
+                add_food_to_list1(110)
+            elif napitki =="Морс облепиховый":
+                sum_of_zakaz=sum_of_zakaz+110
+                korzina=korzina+1
+                add_food_to_list1(110)
+            elif napitki =="Морс из черной смородины":
+                sum_of_zakaz=sum_of_zakaz+110
+                korzina=korzina+1
+                add_food_to_list1(110)
+            elif napitki =="Сок добрый Мульти Фрукт":
+                sum_of_zakaz=sum_of_zakaz+210
+                korzina=korzina+1
+                add_food_to_list1(210)
+            elif napitki =="Сок добрый Яблочный":
+                sum_of_zakaz=sum_of_zakaz+230
+                korzina=korzina+1
+                add_food_to_list1(230)
+            elif napitki =="Сок добрый Томатный":
+                sum_of_zakaz=sum_of_zakaz+230
+                korzina=korzina+1
+                add_food_to_list1(230)
+            elif napitki =="Чай зеленый Липтон 0.5":
+                sum_of_zakaz=sum_of_zakaz+50
+                korzina=korzina+1
+                add_food_to_list1(50)
+            elif napitki =="Чай зеленый Липтон 0.5":
+                sum_of_zakaz=sum_of_zakaz+50
+                korzina=korzina+1
+                add_food_to_list1(50)
+            elif napitki =="Чай зеленый Липтон 1":
+                sum_of_zakaz=sum_of_zakaz+120
+                korzina=korzina+1
+                add_food_to_list1(120)
+            elif napitki =="Чай зеленый Липтон 1":
+                sum_of_zakaz=sum_of_zakaz+120
+                korzina=korzina+1
+                add_food_to_list1(120)
+            else:
+                print("Не праильно введено название напитка. ХЗ")
+            add_food_to_list2(napitki)
+        elif kategoria == 5:
+            print("Дополнительно:")
+            print("Соевый соус 40р. (35г.)")  # 1
+            print("Васаби 30р. (10г.)")  # 2
+            print("Имбирь 30р. (10г.)")  # 3
+            print("Соус унаги 50р. (40г.)")  # 4
+            print("Спайси соус 50р. (40г.)")  # 5
+            print("Соус терияки 50р. (40г.)")  # 6
+            print("Палочки 5р.")  # 7
+            souse = str(input("Какие хотите суши? "))
+            if souse == "Соевый соус":
+                sum_of_zakaz = sum_of_zakaz + 40
+                korzina = korzina + 1
+                add_food_to_list1(40)
+            elif souse == "Васаби":
+                sum_of_zakaz = sum_of_zakaz+30
+                korzina = korzina + 1
+                add_food_to_list1(30)
+            elif souse == "Имбирь":
+                sum_of_zakaz = sum_of_zakaz+30
+                korzina = korzina + 1
+                add_food_to_list1(30)
+            elif souse == "Соус унаги":
+                sum_of_zakaz = sum_of_zakaz+50
+                korzina = korzina + 1
+                add_food_to_list1(50)
+            elif souse == "Спайси соус":
+                sum_of_zakaz = sum_of_zakaz+50
+                korzina = korzina + 1
+                add_food_to_list1(50)
+            elif souse == "Соус терияки":
+                sum_of_zakaz = sum_of_zakaz+50
+                korzina = korzina + 1
+                add_food_to_list1(50)
+            elif souse == "Палочки":
+                sum_of_zakaz = sum_of_zakaz+5
+                korzina = korzina + 1
+                add_food_to_list1(5)
+            else:
+                print("Не праильно введено название дополнительного. ХЗ")
+            add_food_to_list2(souse)
+        zakaz = str(input("Хотите перейти к оплате заказа:"))
+        if zakaz=="да":
+            print("Сумма вашего заказа =", sum_of_zakaz,"Руб.")
+            if korzina>0:
+                print("В вашей корзине", korzina,"позиций")
+            else:
+                print("Ваша корзина пуста")
+            oplata=str(input("Как вы хотите оплатить"))
+            if oplata=="Наличными":
+                print("Сумма вашего заказа =", sum_of_zakaz,"Руб.")
+                DENGI1=int(input("Сколко вы хотите ввести денег?"))
+                print("Ваша сдача", DENGI1-sum_of_zakaz, "Руб.")
+                print("Спасибо за заказ, приятного аппетита")
+                print("Вот ваш чек")
+            print()
+            print()
+            print()
+            print("__________________________________________")
+            print(name_of_restarant)
+            print("__________________________________________")
+            print("дата 15.12.2023")
+            print("__________________________________________")
+            print("Пользователь",polzvatel)
+            print("__________________________________________")
+            print("Заказ № 86548")
+            print("__________________________________________")
+            print("Позиции V")
+            print_array2()
+            print("__________________________________________")
+            print("Цены V")
+            print_array1()
+            print("__________________________________________")
+            print("Сумма заказа ", sum_of_zakaz, "Руб.")
+            print("__________________________________________")
+            print("Спасибо за пакупку")
+            print("__________________________________________")
+            print("")
