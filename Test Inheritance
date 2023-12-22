@@ -1,0 +1,12 @@
+class Animal:
+    def __init__(self, name):
+        self.name=name
+class cat(Animal):
+    def meowing(self):
+        print(f"{self.name} is meowing!")
+
+my_cat=cat("Peach")
+
+print(f"My cat's name is {my_cat.name}")
+
+my_cat.meowing()
