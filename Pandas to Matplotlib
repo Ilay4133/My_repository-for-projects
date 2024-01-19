@@ -1,0 +1,13 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+data = pd.read_csv('KNIGA.csv', delimiter=';', names=['name', 'surname', 'id', 'height', 'age'])
+print(data)
+
+df = pd.read_csv('KNIGA.csv')
+
+plt.plot(df['height'], df['age'], label='Линия данных')
+
+plt.title('Пример графика из датасета')
+plt.xlabel('Ось X')
+plt.ylabel('Ось Y')
+plt.show()
