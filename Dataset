@@ -1,0 +1,3 @@
+import pandas as pd
+data = pd.read_csv('KNIGA.csv', delimiter=';', names=['name', 'surname', 'id', 'height', 'age'])
+print(data)
