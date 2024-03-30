@@ -32,27 +32,20 @@ class Truck:
         self.name = name
         self.age = age
         self.color = color
-
     def info(self):
         print(f"Name: {self.name}, age: {self.age}, color: {self.color}")
-
     def make_sound(self):
         print("beeeeeb")
-
-
 class Car:
     def __init__(self, name, age, color):
         self.name = name
         self.age = age
         self.color = color
-
     def info(self):
         print(f"Name: {self.name}, age: {self.age}, color: {self.color}")
-
     def make_sound(self):
         print("bib bib")
-
-
+        
 truck1 = Truck("Ural-4320", 1977, "military green")
 car1 = Car("Porsche 911", 2019, "red")
 
