@@ -1,39 +1,35 @@
-## Это будет сайт видеоплеера, на котором можно будет загружать различные видео (аниме), а потом просматривать их.
+## This will be a video player site where you can download various videos (anime) and then watch them.
 
-### Описание визуальной части:
+### Description of the visual part:
 
-- Будет окно регистрации пользователя (возможно будет регистрация и вход с правами администрации).
-- Будет главная страница с несколькими элементами:
-  - Строка поиска нужного видео (аниме);
-  - Иконка выхода на главную страницу;
-  - Иконка выхода из аккаунта;
-  - Обложки загруженных аниме;
-  - Различные фильтры для поиска аниме;
-  - Красивое оформление (наверное).
-- Будет страница отдельного аниме со всеми сериями (не всеми), на которой будет:
-  - Обложка аниме;
-  - Небольшое описание аниме;
-  - Различная информация о аниме (количество серий, длина серии, год и время года выхода, возрастное ограничение (но кого-то это останавливало?) и т.д.);
-  - Строка поиска нужного видео (аниме);
-  - Иконка выхода на главную страницу;
-  - Иконка выхода из аккаунта;
-  - Иконка перехода в видеоплеер;
-  - Сам видеоплеер, в котором можно будет: выбрать серию, кнопки остановки и запуска произведения видео, иконки оценки (к примеру сердечко и что ни будь еще (пока не знаю какую иконку выбрать)), процентное соотношение оценок.
+- There will be a user registration window (registration and login with administration rights will be possible).
+- There will be a main page with several elements:
+  - Search bar for the desired video (anime);
+  - Icon for going back to the main page;
+  - Account logout icon;
+  - Covers of downloaded anime;
+  - Various filters for searching anime;
+  - Beautiful design (probably).
+- There will be a separate anime page with all the episodes (not all), which will have:
+  - Anime cover;
+  - A short description of the anime;
+  - Various information about the anime (number of episodes, length of the series, year and release season, age limit (but did it stop anyone?), etc.);
+  - Search bar for the desired video (anime);
+  - Icon for going back to the main page;
+  - Account logout icon;
+  - Icon to transition to the video player;
+  - The video player itself, where you can: select an episode, play and pause buttons, rating icons (for example, a heart and any other icon (not yet decided)), percentage of ratings.
 
-### Описание программной части:
+### Description of the software part:
 
-- Будут использоваться библиотеки: Flet, sys, другие (не знаю, какие будут еще).
-- Будут классовое распределение (наследство, полиморфизм и возможно инкапсуляция).
-- Примерные примеры классов (которые будут):
+- Libraries that will be used: Flet, sys, others (not sure about others).
+- There will be class distribution (inheritance, polymorphism, and possibly encapsulation).
+- Sample examples of classes (which will be used):
   - User,
   - Admin_User,
   - Page,
-  - Glav_Page (наследование от Page),
-  - Video_Page (наследование от Page),
+  - Glav_Page (inherits from Page),
+  - Video_Page (inherits from Page),
   - Video_File.
-- Возможно, если полностью закончу код (полностью рабочий код), добавлю MVC.
-- Также будут использоваться встроенные функции Python для создания и записи данных в txt файл.
-- Будет взаимосвязь между функциями.
-
-### Чем будет полезно:
-- Ничем, будем дигродировать).
+- Perhaps, if the code is fully completed (working code), I will add MVC.
+- Python's built-in functions will be used for creating and writing data to a txt file.
