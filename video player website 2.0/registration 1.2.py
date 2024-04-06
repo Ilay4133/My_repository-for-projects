@@ -1,8 +1,6 @@
 import flet as ft
 import sys
 
-rer1=""
-rer2=""
 open('Users_DATA_File.txt', 'a').close()
 
 def main(page):
