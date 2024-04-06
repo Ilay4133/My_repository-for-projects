@@ -1,8 +1,6 @@
 import flet as ft
 import sys
 
-rer1=""
-rer2=""
 open('Users_DATA_File.txt', 'a').close()
 
 def main(page):
@@ -52,8 +50,6 @@ def main(page):
             txt_not_entry1.visible = True
         elif entry_user() == 0:
             txt_not_entry2.visible = True
-
-
 
     def get_user_nickname():
         global geting_user_nickname
