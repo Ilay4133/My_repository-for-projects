@@ -468,31 +468,29 @@ def main(page):
             cur1 = db1.cursor()
             cur1.execute(f"SELECT animes_name FROM anime_names")
 
-            if cur.fetchone() != None:
-                print(1)
-                for row in cur.fetchall():
-                    q=0
-                    for row1 in cur1.fetchall():
-                        if row1 == row:
-                            # n1.visible = True
-                            # n2.visible = True
-                            # n3.visible = True
-                            print(1)
-                            print(2)
-                            print(3)
-                        else:
-                            q=1
-                    if q==1:
-                        db1 = sqlite3.connect('Anime_names_Data.DATA')
-                        cur = db1.cursor()
-                        cur.execute("""CREATE TABLE IF NOT EXISTS anime_names (animes_name TEXT PRIMARY KEY)""")
-                        cur.execute(
-                        f"INSERT INTO anime_names VALUES('{anime_name}')")
-                        db1.commit()
-                        db1 = sqlite3.connect('Anime_names_Data.Data')
-                        cur = db1.cursor()
-                        cur.execute(f"SELECT * FROM anime_names WHERE animes_name = '{row}' ")
-                        print(cur.fetchone())
+            
+            for row in cur.fetchall():
+                q=0
+                for row1 in cur1.fetchall():
+                    if row1 == row:
+                        # n1.visible = True
+                        # n2.visible = True
+                        # n3.visible = True
+                        print(1)
+                        print(2)
+                        print(3)
+                    else:
+                        q=1
+                 if q==1:
+                    db1 = sqlite3.connect('Anime_names_Data.DATA')
+                    cur = db1.cursor()
+                    cur.execute("""CREATE TABLE IF NOT EXISTS anime_names (animes_name TEXT PRIMARY KEY)""")
+                    cur.execute(f"INSERT INTO anime_names VALUES('{anime_name}')")
+                    db1.commit()
+                    db1 = sqlite3.connect('Anime_names_Data.Data')
+                    cur = db1.cursor()
+                    cur.execute(f"SELECT * FROM anime_names WHERE animes_name = '{row}' ")
+                    print(cur.fetchone())
 
                         # n1.value = anime_name
                         # n2.value = anime_description
