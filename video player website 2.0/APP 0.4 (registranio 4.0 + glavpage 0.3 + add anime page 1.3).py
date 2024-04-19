@@ -462,7 +462,7 @@ def main(page):
 
             db = sqlite3.connect('Anime_Dat.Data')
             cur = db.cursor()
-            cur.execute(f"SELECT anime_name FROM anime WHERE anime_name")
+            cur.execute(f"SELECT anime_name FROM anime")
 
             db1 = sqlite3.connect('Anime_nameses_Data.Data')
             cur1 = db1.cursor()
