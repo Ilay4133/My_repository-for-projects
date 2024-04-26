@@ -1,0 +1,70 @@
+import flet as ft
+
+def main(page):
+    page.scroll = "always"
+    page.title="SERVICE FOR HELP FOR DOGS FROM SHELTERS"
+    page.window_width=520
+    page.window_height = 1000
+    page.vertical_alignment = ft.MainAxisAlignment.START
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+    page.theme_mode="dark"
+    e=1
+    class User:
+        def enter_user(self):
+            admin.visible=False
+            user.visible = False
+            Glav_page.glav_page_us(e)
+            page.update()
+            print(1)
+    class Admin:
+        def enter_admin(self):
+            user.visible = False
+            admin.visible = False
+            Glav_page.glav_page_adm(e)
+            page.update()
+            print(2)
+    class Glav_page:
+        def glav_page_us(self):
+            back.visible = True
+            walk.visible = True
+            feed.visible = True
+            medicines.visible = True
+            guardianship.visible = True
+            adopt.visible = True
+        def glav_page_adm(self):
+            back.visible = True
+            pass
+
+        def del1(self):
+            back.visible = False
+            walk.visible=False
+            feed.visible=False
+            medicines.visible=False
+            guardianship.visible=False
+            adopt.visible=False
+            page.update()
+        def back(self):
+            Glav_page.del1(e)
+            admin.visible = True
+            user.visible = True
+            back.visible=False
+            page.update()
+
+    name_of_the_shelter = ft.Text(value='Приют "Добрые руки" ', size=30, color="blue600", weight=ft.FontWeight.W_500)
+
+    admin = ft.ElevatedButton(text="Вход с правами админа", width=300, height=50, on_click=Admin.enter_admin)
+    user = ft.ElevatedButton(text="Вход с правами пользователя", width=300, height=50, on_click=User.enter_user)
+
+    back = ft.ElevatedButton(text="Обратно", width=300, height=50, on_click=Glav_page.back)
+
+    walk = ft.ElevatedButton(text="Погулять с собакой", width=300, height=50, on_click=Admin.enter_admin)
+    feed = ft.ElevatedButton(text="Пожертвовать корм", width=300, height=50, on_click=User.enter_user)
+    medicines = ft.ElevatedButton(text="Пожертвовать лекарства", width=300, height=50, on_click=Admin.enter_admin)
+    guardianship = ft.ElevatedButton(text="Стать опекуном подопечного", width=300, height=50, on_click=User.enter_user)
+    adopt = ft.ElevatedButton(text="Усыновить подопечного", width=300, height=50, on_click=Admin.enter_admin)
+
+    page.add(ft.Column([name_of_the_shelter, user, admin, walk, feed, medicines, guardianship, adopt, back]))
+    Glav_page.del1(e)
+
+
+ft.app(target=main)
