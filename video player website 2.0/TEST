@@ -1,0 +1,51 @@
+import flet as ft
+import sqlite3
+
+def main(page: ft.Page):
+    class Add_anime_page():
+        def obnov_buttons_spisok(self):
+            print(1)
+            e = 0
+            r = ""
+            e = 0
+            db = sqlite3.connect('Anime_nameses_Data.Data')
+            cur = db.cursor()
+            cur.execute("SELECT animes_name FROM anime_names")
+            print(1)
+            for row in cur.fetchall():
+                print(1)
+                print(e)
+                e = e + 1
+                print(e)
+            test_text = [ft.ElevatedButton(text="Тест", width=300, height=50) for _ in
+                         range(3)]
+            watch_anime_buttons.controls.extend(test_text)
+            db.close()
+            page.update()
+
+        def obnov_spisok_anime(self):
+            raw = ""
+            db = sqlite3.connect('Anime_Dat.DATA')
+            cur = db.cursor()
+            cur.execute("SELECT anime_name, anime_description, anime_age FROM anime")
+            names = "Название: "
+            desc = "Описание: "
+            age = "Год: "
+            for row in cur.fetchall():
+                raw = f"{raw + names + str(row[0])}\n" + f"{desc + str(row[1])}\n" + f"{age + str(row[2])}\n"
+                print(row[0])
+            print(raw)
+            global anime_spisok
+            anime_spisok = ft.Text(value=f"{raw}", size=20, color="blue600")
+            db.close()
+
+    # Spiski
+    anime_spisok = ft.Text(value="")
+    # Column
+    watch_anime_buttons = ft.Column()
+    # Row
+    spisok_animeshek = ft.Row(anime_spisok, watch_anime_buttons)
+
+    page.add(spisok_animeshek)
+
+ft.app(target=main)
