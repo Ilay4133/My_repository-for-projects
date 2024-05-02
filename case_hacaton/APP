@@ -2,6 +2,27 @@ import flet as ft
 import sqlite3
 
 def main(page: ft.Page):
+    open("file1.txt", "a").close()
+    open("file2.txt", "a").close()
+
+    r=0
+
+    with open("file2.txt") as f:
+        lines = f.readlines()
+    for row in lines:
+        rew = int(row)
+
+    if rew>=0:
+        pass
+    else:
+        with open("file2.txt", "a") as file:
+            file.write(f"{r}" + "\n")
+
+        with open("file2.txt", "a") as file:
+            file.write(f"{r}" + "\n")
+
+
+
 
     db = sqlite3.connect('Dogs.data')
     cur = db.cursor()
@@ -10,6 +31,16 @@ def main(page: ft.Page):
         age INTEGER, paroda TEXT, 
         pol TEXT, pis TEXT, 
         foto TEXT)""")
+    db.close()
+
+    db = sqlite3.connect('Feed_donat.data')
+    cur = db.cursor()
+    cur.execute("""CREATE TABLE IF NOT EXISTS f_doges (money INTEGER PRIMARY KEY)""")
+    db.close()
+
+    db = sqlite3.connect('Med_donat.data')
+    cur = db.cursor()
+    cur.execute("""CREATE TABLE IF NOT EXISTS m_doges (money INTEGER PRIMARY KEY)""")
     db.close()
 
     db = sqlite3.connect('Walk_Dogs.data')
@@ -29,19 +60,18 @@ def main(page: ft.Page):
 
     page.scroll = "always"
     page.title="SERVICE FOR HELP FOR DOGS FROM SHELTERS"
+    page.theme_mode = "dark"
     page.window_width=520
     page.window_height = 1000
     page.window_resizable=False
     page.update()
     global money1
     global money2
-    money1=0
-    money2=0
-
+    money1 = 0
+    money2 = 0
 
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
-    page.theme_mode="dark"
     e=1
     class User:
         def enter_user(self):
@@ -83,8 +113,23 @@ def main(page: ft.Page):
             cur.execute(sql_del, (walk_donation.value,))
             db.commit()
             db.close()
-            walk_ok_text.visible = True
+
+            raw = ""
+            db = sqlite3.connect('Walk_Dogs.data')
+            cur = db.cursor()
+            cur.execute("SELECT name FROM w_doges")
+            names = "Имя: "
+
+            for row in cur.fetchall():
+                raw = f"{raw + names + str(row[0])}\n"
+                print(row[0])
+            print(raw)
+            w_spisok_sobak.value=raw
+            db.close()
+
             Glav_page.ok(1)
+            walk_ok_text.visible = True
+            page.update()
             walk_donation.value=""
             page.update()
 
@@ -101,11 +146,49 @@ def main(page: ft.Page):
             db.close()
             db1.commit()
             db1.close()
-            walk_ok_text.visible = True
+
+            raw = ""
+            db = sqlite3.connect('Walk_Dogs.data')
+            cur = db.cursor()
+            cur.execute("SELECT name FROM w_doges")
+            names = "Имя: "
+
+            for row in cur.fetchall():
+                raw = f"{raw + names + str(row[0])}\n"
+                print(row[0])
+            print(raw)
+            w_spisok_sobak.value = raw
+            db.close()
+
+            raw = ""
+            db = sqlite3.connect('Guardianship_Dogs.data')
+            cur = db.cursor()
+            cur.execute("SELECT name FROM g_doges")
+            names = "Имя: "
+
+            for row in cur.fetchall():
+                raw = f"{raw + names + str(row[0])}\n"
+                print(row[0])
+            print(raw)
+            g_spisok_sobak.value = raw
+            db.close()
+
+            Glav_page.ok(1)
+            vozvrat_walk_ok_text.visible = True
+            vozvrat_walk_name.value = ""
+            page.update()
+
+            Glav_page.ok(1)
+            vozvrat_walk_ok_text.visible = True
+            vozvrat_walk_name.value = ""
+            page.update()
+
+
             Glav_page.ok(1)
             page.update()
             guardianship_ok_text.visible = True
-            Glav_page.ok(1)
+            page.update()
+
             guardianship_donation.value=""
             page.update()
 
@@ -134,8 +217,67 @@ def main(page: ft.Page):
             db2.close()
             db3.commit()
             db3.close()
-            adopt_ok_text.visible = True
+
+            raw = ""
+            db = sqlite3.connect('Guardianship_Dogs.data')
+            cur = db.cursor()
+            cur.execute("SELECT name FROM g_doges")
+            names = "Имя: "
+
+            for row in cur.fetchall():
+                raw = f"{raw + names + str(row[0])}\n"
+                print(row[0])
+            print(raw)
+            g_spisok_sobak.value = raw
+            db.close()
+            page.update()
+
+            raw = ""
+            db = sqlite3.connect('Adopt_Dogs.data')
+            cur = db.cursor()
+            cur.execute("SELECT name FROM a_doges")
+            names = "Имя: "
+
+            for row in cur.fetchall():
+                raw = f"{raw + names + str(row[0])}\n"
+                print(row[0])
+            print(raw)
+            a_spisok_sobak.value = raw
+            db.close()
+            page.update()
+
+            raw = ""
+            db = sqlite3.connect('Walk_Dogs.data')
+            cur = db.cursor()
+            cur.execute("SELECT name FROM w_doges")
+            names = "Имя: "
+
+            for row in cur.fetchall():
+                raw = f"{raw + names + str(row[0])}\n"
+                print(row[0])
+            print(raw)
+            w_spisok_sobak.value = raw
+            db.close()
+            page.update()
+
+            raw = ""
+            db = sqlite3.connect('Dogs.data')
+            cur = db.cursor()
+            cur.execute("SELECT name,age, paroda, pol, pis ,foto FROM doges")
+            names = "Имя: "
+            parodes = "Порода: "
+            ages = ", Возраст: "
+            poles = "Пол: "
+            opis = "Описание: "
+
+            for row in cur.fetchall():
+                raw = f"{raw + names + str(row[0]) + ages + str(row[1])}\n" + f"{parodes + str(row[2])}\n" + f"{poles + str(row[3])}\n" + f"{opis + str(row[4])}\n" + "\n"
+                print(row[0], row[1])
+            spisok_sobak.value = raw
+            db.close()
+
             Glav_page.ok(1)
+            adopt_ok_text.visible = True
             adopt_donation.value=""
             page.update()
 
@@ -144,9 +286,23 @@ def main(page: ft.Page):
             cur = db.cursor()
             cur.execute(f"INSERT INTO w_doges VALUES('{str(vozvrat_walk_name.value)}')")
             db.commit()
-            vozvrat_walk_ok_text.visible = True
-            Glav_page.ok(1)
             db.close()
+
+            raw = ""
+            db = sqlite3.connect('Walk_Dogs.data')
+            cur = db.cursor()
+            cur.execute("SELECT name FROM w_doges")
+            names = "Имя: "
+
+            for row in cur.fetchall():
+                raw = f"{raw + names + str(row[0])}\n"
+                print(row[0])
+            print(raw)
+            w_spisok_sobak.value = raw
+            db.close()
+
+            Glav_page.ok(1)
+            vozvrat_walk_ok_text.visible = True
             vozvrat_walk_name.value=""
             page.update()
 
@@ -163,11 +319,53 @@ def main(page: ft.Page):
             db1.commit()
             cur2.execute(f"INSERT OR IGNORE INTO a_doges VALUES('{str(vozvrat_guardianship_name.value)}')")
             db2.commit()
-            vozvrat_guardianship_ok_text.visible = True
             Glav_page.ok(1)
+            vozvrat_guardianship_ok_text.visible = True
             db.close()
             db1.close()
             db2.close()
+
+            raw = ""
+            db = sqlite3.connect('Adopt_Dogs.data')
+            cur = db.cursor()
+            cur.execute("SELECT name FROM a_doges")
+            names = "Имя: "
+
+            for row in cur.fetchall():
+                raw = f"{raw + names + str(row[0])}\n"
+                print(row[0])
+            print(raw)
+            a_spisok_sobak.value = raw
+            db.close()
+
+            page.update()
+
+            raw = ""
+            db = sqlite3.connect('Walk_Dogs.data')
+            cur = db.cursor()
+            cur.execute("SELECT name FROM w_doges")
+            names = "Имя: "
+
+            for row in cur.fetchall():
+                raw = f"{raw + names + str(row[0])}\n"
+                print(row[0])
+            print(raw)
+            w_spisok_sobak.value = raw
+            db.close()
+            page.update()
+
+            raw = ""
+            db = sqlite3.connect('Guardianship_Dogs.data')
+            cur = db.cursor()
+            cur.execute("SELECT name FROM g_doges")
+            names = "Имя: "
+
+            for row in cur.fetchall():
+                raw = f"{raw + names + str(row[0])}\n"
+                print(row[0])
+            print(raw)
+            g_spisok_sobak.value = raw
+            db.close()
             vozvrat_guardianship_name.value = ""
             page.update()
 
@@ -193,8 +391,12 @@ def main(page: ft.Page):
             vozvrat_guardianship.visible = True
             page.update()
         def del_dogs_vozvrat(self):
+            walk_vozvrat_button.visible = False
+            vozvrat_walk_name.visible = False
             vozvrat_walk.visible = False
             vozvrat_guardianship.visible = False
+            guardianship_vozvrat_button.visible = False
+            vozvrat_guardianship_name.visible = False
             page.update()
 
         def add_dogs_list(self):
@@ -301,6 +503,11 @@ def main(page: ft.Page):
 
 
         def del1(self):
+            walk_ok_text.visible = False
+            guardianship_ok_text.visible = False
+            adopt_ok_text.visible = False
+            vozvrat_walk_ok_text.visible = False
+            vozvrat_guardianship_ok_text.visible = False
             ok_button.visible = False
             walk_vozvrat_button.visible = False
             guardianship_vozvrat_button.visible = False
@@ -361,23 +568,67 @@ def main(page: ft.Page):
             back.visible=False
             page.update()
 
+        def obnov_donatov(self):
+            global i
+            i = 2
+            with open("file1.txt") as f:
+                lines = f.readlines()
+            for row in lines:
+                rew1=int(row)
+            get_feed_gramm.value = f"{rew1} руб."
+            page.update()
+
+            with open("file2.txt") as f:
+                lines = f.readlines()
+            for row in lines:
+                rew=int(row)
+            get_med_money.value = f"{rew} руб."
+            page.update()
+
         def donation_feed(self):
             global money1
+            with open("file1.txt") as f:
+                lines = f.readlines()
+            for row in lines:
+                money1 = int(row)
+
             if float(feed_donation.value)>=0:
-                money1=money1+float(feed_donation.value)
+                val=int(money1 + int(feed_donation.value))
+                with open("file1.txt", "a") as file:
+                    file.write(str(val) + "\n")
+                with open("file1.txt") as f:
+                    lines = f.readlines()
+                for row in lines:
+                    rew = int(row)
+                money1=rew
                 feed_donation.value=""
                 get_feed_gramm.value=f"{money1} руб."
                 page.update()
+
             else:
                 feed_donation.value = ""
                 page.update()
+
         def donation_med(self):
             global money2
+            with open("file2.txt") as f:
+                lines = f.readlines()
+            for row in lines:
+                money2 = int(row)
+
             if float(med_donation.value) >= 0:
-                money2 = money2 + float(med_donation.value)
+                val = int(money1 + int(med_donation.value))
+                with open("file1.txt", "a") as file:
+                    file.write(str(val) + "\n")
+                with open("file2.txt") as f:
+                    lines = f.readlines()
+                for row in lines:
+                    rew = int(row)
+                money2 = rew
                 med_donation.value = ""
                 get_med_money.value = f"{money2} руб."
                 page.update()
+
             else:
                 med_donation.value = ""
                 page.update()
@@ -401,31 +652,13 @@ def main(page: ft.Page):
             vozvrat_guardianship_name.value = ""
             page.update()
 
-        def dog_lists_obnov(self):
-            db = sqlite3.connect('Dogs.data')
-            cur = db.cursor()
-            cur.execute(f"SELECT name FROM doges")
+        def add_dog_to_table(self):
             db1 = sqlite3.connect('Walk_Dogs.data')
             cur1 = db1.cursor()
             db2 = sqlite3.connect('Adopt_Dogs.data')
             cur2 = db2.cursor()
             db3 = sqlite3.connect('Guardianship_Dogs.data')
             cur3 = db3.cursor()
-            for row in cur.fetchall():
-                print(row)
-                cur1.execute(f"INSERT OR IGNORE INTO w_doges VALUES('{str(row[0])}')")
-                cur2.execute(f"INSERT OR IGNORE INTO a_doges VALUES('{str(row[0])}')")
-                cur3.execute(f"INSERT OR IGNORE INTO g_doges VALUES('{str(row[0])}')")
-                db1.commit()
-                db2.commit()
-                db3.commit()
-
-            db.close()
-            db1.close()
-            db2.close()
-            db3.close()
-
-        def add_dog_to_table(self):
             db = sqlite3.connect('Dogs.data')
             cur = db.cursor()
             cur.execute("""CREATE TABLE IF NOT EXISTS doges (
@@ -440,6 +673,12 @@ def main(page: ft.Page):
             cur = db.cursor()
             cur.execute(f"INSERT INTO doges VALUES('{new_dog_name.value}', '{int(new_dog_age.value)}', '{new_dog_paroda.value}',"
                         f" '{new_dog_pol.value}', '{new_dog_opis.value}', '{new_dog_foto.value}')")
+            cur1.execute(f"INSERT OR IGNORE INTO w_doges VALUES('{new_dog_name.value}')")
+            cur2.execute(f"INSERT OR IGNORE INTO a_doges VALUES('{new_dog_name.value}')")
+            cur3.execute(f"INSERT OR IGNORE INTO g_doges VALUES('{new_dog_name.value}')")
+            db1.commit()
+            db2.commit()
+            db3.commit()
             db.commit()
             db = sqlite3.connect('Dogs.Data')
             cur = db.cursor()
@@ -447,8 +686,73 @@ def main(page: ft.Page):
                         f"AND paroda = '{new_dog_paroda.value}' AND pol = '{new_dog_pol.value}' "
                         f"AND pis = '{new_dog_opis.value}' AND foto = '{new_dog_foto.value}'")
             print(cur.fetchone())
-
             db.close()
+            db1.close()
+            db2.close()
+            db3.close()
+
+            raw = ""
+            rew = ""
+            db = sqlite3.connect('Dogs.data')
+            cur = db.cursor()
+            cur.execute("SELECT name,age, paroda, pol, pis ,foto FROM doges")
+
+            names = "Имя: "
+            parodes = "Порода: "
+            ages = ", Возраст: "
+            poles = "Пол: "
+            opis = "Описание: "
+
+            for row in cur.fetchall():
+                raw = f"{raw + names + str(row[0]) + ages + str(row[1])}\n" + f"{parodes + str(row[2])}\n" + f"{poles + str(row[3])}\n" + f"{opis + str(row[4])}\n" + "\n"
+                rew = f"{rew + str(row[5])}\n"
+                print(row[0], row[1])
+            spisok_sobak.value=raw
+            db.close()
+
+            raw = ""
+            db = sqlite3.connect('Walk_Dogs.data')
+            cur = db.cursor()
+            cur.execute("SELECT name FROM w_doges")
+            names = "Имя: "
+
+            for row in cur.fetchall():
+                raw = f"{raw + names + str(row[0])}\n"
+                print(row[0])
+            print(raw)
+            w_spisok_sobak.value = raw
+            db.close()
+            page.update()
+
+            raw = ""
+            db = sqlite3.connect('Adopt_Dogs.data')
+            cur = db.cursor()
+            cur.execute("SELECT name FROM a_doges")
+            names = "Имя: "
+
+            for row in cur.fetchall():
+                raw = f"{raw + names + str(row[0])}\n"
+                print(row[0])
+            print(raw)
+            a_spisok_sobak.value = raw
+            db.close()
+            page.update()
+
+            raw = ""
+            db = sqlite3.connect('Guardianship_Dogs.data')
+            cur = db.cursor()
+            cur.execute("SELECT name FROM g_doges")
+            names = "Имя: "
+
+            for row in cur.fetchall():
+                raw = f"{raw + names + str(row[0])}\n"
+                print(row[0])
+            print(raw)
+            g_spisok_sobak.value = raw
+            db.close()
+            page.update()
+
+
             new_dog_name.value = ""
             del_dog.value = ""
             new_dog_age.value = ""
@@ -467,6 +771,95 @@ def main(page: ft.Page):
             cur.execute(sql_del, (del_dog.value, ))
             db.commit()
             db.close()
+
+            db = sqlite3.connect('Dogs.data')
+            cur = db.cursor()
+            db1 = sqlite3.connect('Walk_Dogs.data')
+            cur1 = db1.cursor()
+            db2 = sqlite3.connect('Guardianship_Dogs.data')
+            cur2 = db2.cursor()
+            db3 = sqlite3.connect('Adopt_Dogs.data')
+            cur3 = db3.cursor()
+            sql_del = "DELETE FROM doges WHERE name = ?"
+            cur.execute(sql_del, (del_dog.value,))
+            sql_del1 = "DELETE FROM W_doges WHERE name = ?"
+            cur1.execute(sql_del1, (del_dog.value,))
+            sql_del2 = "DELETE FROM g_doges WHERE name = ?"
+            cur2.execute(sql_del2, (del_dog.value,))
+            sql_del3 = "DELETE FROM a_doges WHERE name = ?"
+            cur3.execute(sql_del3, (del_dog.value,))
+            db.commit()
+            db.close()
+            db1.commit()
+            db1.close()
+            db2.commit()
+            db2.close()
+            db3.commit()
+            db3.close()
+
+            raw = ""
+            rew = ""
+            db = sqlite3.connect('Dogs.data')
+            cur = db.cursor()
+            cur.execute("SELECT name,age, paroda, pol, pis ,foto FROM doges")
+
+            names = "Имя: "
+            parodes = "Порода: "
+            ages = ", Возраст: "
+            poles = "Пол: "
+            opis = "Описание: "
+
+            for row in cur.fetchall():
+                raw = f"{raw + names + str(row[0]) + ages + str(row[1])}\n" + f"{parodes + str(row[2])}\n" + f"{poles + str(row[3])}\n" + f"{opis + str(row[4])}\n" + "\n"
+                rew = f"{rew + str(row[5])}\n"
+                print(row[0], row[1])
+            spisok_sobak.value = raw
+            page.update()
+            db.close()
+
+            raw = ""
+            db = sqlite3.connect('Adopt_Dogs.data')
+            cur = db.cursor()
+            cur.execute("SELECT name FROM a_doges")
+            names = "Имя: "
+
+            for row in cur.fetchall():
+                raw = f"{raw + names + str(row[0])}\n"
+                print(row[0])
+            print(raw)
+            a_spisok_sobak.value = raw
+            db.close()
+
+            page.update()
+
+            raw = ""
+            db = sqlite3.connect('Walk_Dogs.data')
+            cur = db.cursor()
+            cur.execute("SELECT name FROM w_doges")
+            names = "Имя: "
+
+            for row in cur.fetchall():
+                raw = f"{raw + names + str(row[0])}\n"
+                print(row[0])
+            print(raw)
+            w_spisok_sobak.value = raw
+            db.close()
+            page.update()
+
+            raw = ""
+            db = sqlite3.connect('Guardianship_Dogs.data')
+            cur = db.cursor()
+            cur.execute("SELECT name FROM g_doges")
+            names = "Имя: "
+
+            for row in cur.fetchall():
+                raw = f"{raw + names + str(row[0])}\n"
+                print(row[0])
+            print(raw)
+            g_spisok_sobak.value = raw
+            db.close()
+            vozvrat_guardianship_name.value = ""
+            page.update()
 
         def del_dog(self):
             Dog.del_dog_from_table(1)
@@ -504,6 +897,7 @@ def main(page: ft.Page):
             db.close()
 
         def creat_w_dogs_list(self):
+            global raw
             raw=""
             db = sqlite3.connect('Walk_Dogs.data')
             cur = db.cursor()
@@ -550,7 +944,6 @@ def main(page: ft.Page):
             page.add(g_spisok_sobak)
             db.close()
 
-    #icon_account = ft.IconButton(ft.icons.ACCOUNT_CIRCLE_OUTLINED, icon_size=60, icon_color="white500")
     feed_donation = ft.TextField(value="", hint_text="Сколько вы хотите пожертвовать?", width=300)
     med_donation = ft.TextField(value="", hint_text="Сколько вы хотите пожертвовать?", width=300)
     walk_donation = ft.TextField(value="", hint_text="Кого вы хотите выгулить?", width=300)
@@ -579,7 +972,7 @@ def main(page: ft.Page):
     del_dog = ft.TextField(value="", hint_text="Имя собаки", width=300)
     add_del_dog = ft.ElevatedButton(text="Удалить собаку из списка", width=300, height=50, on_click=Dog.del_dog)
 
-    walk_ok_text = ft.Text(value=f'Вы подали заявку на прогулку с {walk_donation.value}', size=25, color="blue600")
+    walk_ok_text = ft.Text(value=f'Вы подали заявку на прогулку  {walk_donation.value}', size=25, color="blue600")
     guardianship_ok_text = ft.Text(value=f'Вы подали заявку на опекунство {guardianship_donation.value}', size=25, color="blue600")
     adopt_ok_text = ft.Text(value=f'Вы подали заявку на усыновление {adopt_donation.value}', size=25, color="blue600")
     vozvrat_walk_ok_text = ft.Text(value=f'Вы подали заявку на возврат {vozvrat_walk_name.value} после прогулки', size=25, color="blue600")
@@ -609,7 +1002,7 @@ def main(page: ft.Page):
     guardianship = ft.ElevatedButton(text="Стать опекуном подопечного", width=300, height=50, on_click=Glav_page.add_guardianship, on_long_press=Glav_page.del_guardianship)
     adopt = ft.ElevatedButton(text="Усыновить подопечного", width=300, height=50, on_click=Glav_page.add_adopt, on_long_press=Glav_page.del_adopt)
 
-    #Dog.dog_lists_obnov(1)
+    Glav_page.obnov_donatov(1)
 
     page.add(ft.Column([name_of_the_shelter, user, admin, dogs_list, list_dogs]))
     Dog.creat_dogs_list(1)
@@ -627,7 +1020,7 @@ def main(page: ft.Page):
                         dog_new, new_dog_name,new_dog_age,new_dog_paroda,new_dog_pol, new_dog_opis,new_dog_foto,
                         add_new_dog, dog_del, del_dog, add_del_dog,vozvrat, vozvrat_walk,vozvrat_walk_name, walk_vozvrat_button,
                         vozvrat_guardianship,vozvrat_guardianship_name,guardianship_vozvrat_button,
-                        back,ok_button]))
+                        back, walk_ok_text, guardianship_ok_text, adopt_ok_text,vozvrat_walk_ok_text,vozvrat_guardianship_ok_text,ok_button]))
     Glav_page.del1(e)
 
 ft.app(target=main)
