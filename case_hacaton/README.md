@@ -32,7 +32,7 @@ This is a mobile app (will be in the future) for a dog shelter. On it, you can t
 ### User Panel
 - Shelter name
 - Button for opening the list of dogs
-- List of dogs
+  - List of dogs
 - "Walk a Dog" button
   - Field for entering the name of the dog you want to walk
   - List of dog names that can be walked
