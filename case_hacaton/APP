@@ -617,14 +617,14 @@ def main(page: ft.Page):
                 money2 = int(row)
 
             if float(med_donation.value) >= 0:
-                val = int(money1 + int(med_donation.value))
-                with open("file1.txt", "a") as file:
+                val = money2 + int(med_donation.value)
+                with open("file2.txt", "a") as file:
                     file.write(str(val) + "\n")
                 with open("file2.txt") as f:
                     lines = f.readlines()
                 for row in lines:
-                    rew = int(row)
-                money2 = rew
+                    rew1 = int(row)
+                money2 = rew1
                 med_donation.value = ""
                 get_med_money.value = f"{money2} руб."
                 page.update()
