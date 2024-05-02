@@ -61,3 +61,16 @@ This is a mobile app (will be in the future) for a dog shelter. On it, you can t
     - Field for entering the name of the dog you want to return after fostering
     - "Submit a Request to Return a Dog" button
 - "Back" button
+
+## Description of the Software Part
+
+### Libraries
+- Flet
+- SQLite3
+- sys
+
+### Classes
+- Dog
+- User
+- Admin
+- Glav_page
