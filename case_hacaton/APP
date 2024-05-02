@@ -4,18 +4,19 @@ import sqlite3
 def main(page: ft.Page):
     open("file1.txt", "a").close()
     open("file2.txt", "a").close()
-
+    global ruw
+    ruw=0
     r=0
 
     with open("file2.txt") as f:
         lines = f.readlines()
     for row in lines:
-        rew = int(row)
+        ruw = int(row)
 
-    if rew>=0:
+    if ruw==None:
         pass
     else:
-        with open("file2.txt", "a") as file:
+        with open("file1.txt", "a") as file:
             file.write(f"{r}" + "\n")
 
         with open("file2.txt", "a") as file:
