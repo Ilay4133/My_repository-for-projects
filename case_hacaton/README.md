@@ -1,5 +1,7 @@
 # Mobile App for a Dog Shelter
 
+(Note: The project folder is named "Case Hakatona" (Russian for "Hackathon Case") because the code was initially uploaded to the wrong folder.)
+
 This is a mobile app (will be in the future) for a dog shelter. On it, you can take a dog for a walk, take a dog for foster care (take a dog for guardianship), and adopt a dog.
 
 ## Description of the Visual Part
