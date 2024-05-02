@@ -1,6 +1,7 @@
 # Mobile App for a Dog Shelter
 
 (Note: The project folder is named "Case Hakatona" (Russian for "Hackathon Case") because the code was initially uploaded to the wrong folder.)
+(Note: The name of the shelter "Good Hands" was not chosen according to the project, it can be replaced with another name.)
 
 This is a mobile app (will be in the future) for a dog shelter. On it, you can take a dog for a walk, take a dog for foster care (take a dog for guardianship), and adopt a dog.
 
