@@ -13,7 +13,7 @@ def main(page: ft.Page):
     for row in lines:
         ruw = int(row)
 
-    if ruw==None:
+    if ruw!=0:
         pass
     else:
         with open("file1.txt", "a") as file:
