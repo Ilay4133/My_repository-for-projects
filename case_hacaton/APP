@@ -1,5 +1,6 @@
 import flet as ft
 import sqlite3
+import sys
 
 def main(page: ft.Page):
     open("file1.txt", "a").close()
@@ -21,6 +22,9 @@ def main(page: ft.Page):
 
         with open("file2.txt", "a") as file:
             file.write(f"{r}" + "\n")
+
+
+
 
     db = sqlite3.connect('Dogs.data')
     cur = db.cursor()
@@ -73,12 +77,53 @@ def main(page: ft.Page):
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     e=1
+
+
+
+
     class User:
+        def registration_new_user(self):
+            db = sqlite3.connect('Users_file.Data')
+            cur = db.cursor()
+            cur.execute("""CREATE TABLE IF NOT EXISTS users (
+                       nickname TEXT PRIMARY KEY,
+                       name TEXT,
+                       second_name TEXT,
+                       city TEXT,
+                       age INTEGER,
+                       password INTEGER
+                   )""")
+            cur.execute(
+                f"INSERT INTO users VALUES('{txt_nickname.value}', '{txt_name.value}', '{txt_second_name.value}', '{txt_city.value}', '{txt_age.value}', '{int(txt_pasword.value)}')")
+            db.commit()
+            db.close()
+
+        def entry_user1(self):
+            admin = "Ilay"
+            admin_pasword = "1111"
+            db = sqlite3.connect('Users_file.Data')
+            cur = db.cursor()
+            cur.execute(
+                f"SELECT * FROM users WHERE nickname ='{txt_check_nickname.value}' AND password = '{txt_check_pasword.value}'")
+            if cur.fetchone() != None:
+                if txt_check_nickname.value == admin and txt_check_pasword.value == admin_pasword:
+                    print(3)
+                    return 3
+                else:
+                    print(2)
+                    return 2
+            else:
+                print(3)
+                return 0
+            db.commit()
+            db.close()
+
         def enter_user(self):
             admin.visible=False
             user.visible = False
             Glav_page.glav_page_us(e)
             page.update()
+
     class Admin:
         def enter_admin(self):
             user.visible = False
@@ -87,8 +132,94 @@ def main(page: ft.Page):
             page.update()
 
     class Glav_page:
+
         global money1
         global money2
+
+        def enter1(self):
+            User.registration_new_user(1)
+            Glav_page.regist_window_close(1)
+            page.update()
+
+        def enter2(self):
+            User.entry_user1(1)
+            Glav_page.entry_window_close(1)
+            if User.entry_user1(1)==3:
+                Admin.enter_admin(1)
+            elif User.entry_user1(1)==2:
+                User.enter_user(1)
+
+            page.update()
+
+        def regist_window_close(self):
+            regist_text.visible = False
+            txt_nickname.visible = False
+            txt_name.visible = False
+            txt_second_name.visible = False
+            txt_city.visible = False
+            txt_age.visible = False
+            txt_pasword.visible = False
+            enter1.visible = False
+            hom.visible = False
+            page.update()
+
+        def entry_window_close(self):
+            entry_text.visible = False
+            txt_check_nickname.visible = False
+            txt_check_pasword.visible = False
+            enter2.visible = False
+            hom.visible = False
+            page.update()
+
+        def regist_window_open(self):
+            regist_text.visible = True
+            txt_nickname.visible=True
+            txt_name.visible=True
+            txt_second_name.visible=True
+            txt_city.visible=True
+            txt_age.visible=True
+            txt_pasword.visible=True
+            enter1.visible = True
+            hom.visible = True
+            page.update()
+
+        def entry_window_open(self):
+            entry_text.visible = True
+            txt_check_nickname.visible = True
+            txt_check_pasword.visible = True
+            enter2.visible = True
+            hom.visible = True
+            page.update()
+
+
+        def home(self):
+            Glav_page.regist_window_close(1)
+            Glav_page.entry_window_close(1)
+            regist.visible = True
+            login.visible = True
+            close.visible = True
+            page.update()
+
+        def button_clicked_start_registration(self):
+            regist.visible = False
+            login.visible = False
+            close.visible = False
+            Glav_page.regist_window_open(1)
+            page.update()
+
+        def button_clicked_start_entry(self):
+            regist.visible = False
+            login.visible = False
+            close.visible = False
+            Glav_page.entry_window_open(1)
+            page.update()
+
+        def button_clicked_start_close(self):
+            regist.visible = False
+            login.visible = False
+            close.visible = False
+            page.update()
+            sys.exit("Error: Выход из системы")
 
         def glav_page_ok_back(self):
             Glav_page.del1(1)
@@ -504,6 +635,19 @@ def main(page: ft.Page):
 
 
         def del1(self):
+            entry_text.visible = False
+            regist_text.visible = False
+            hom.visible = False
+            enter1.visible = False
+            enter2.visible = False
+            txt_nickname.visible = False
+            txt_name.visible = False
+            txt_second_name.visible = False
+            txt_city.visible = False
+            txt_age.visible = False
+            txt_pasword.visible = False
+            txt_check_nickname.visible = False
+            txt_check_pasword.visible = False
             pol_muz.visible = False
             pol_zen.visible = False
             walk_ok_text.visible = False
@@ -1017,12 +1161,44 @@ def main(page: ft.Page):
     guardianship = ft.ElevatedButton(text="Стать опекуном подопечного", width=300, height=50, on_click=Glav_page.add_guardianship, on_long_press=Glav_page.del_guardianship)
     adopt = ft.ElevatedButton(text="Усыновить подопечного", width=300, height=50, on_click=Glav_page.add_adopt, on_long_press=Glav_page.del_adopt)
 
-    pol_muz=ft.Checkbox(label="Мужской пол", active_color="blue400",width=300, height=30,label_style=ft.TextStyle(color="blue600",size=24,weight=ft.FontWeight.BOLD))
-    pol_zen=ft.Checkbox(label="Женский пол", active_color="pink400", width=300, height=30,label_style=ft.TextStyle(color="pink600",size=24,weight=ft.FontWeight.BOLD))
+    pol_muz=ft.Checkbox(label="Мужской пол", active_color="blue400",width=300, height=30,label_style=ft.TextStyle(color="blue600",size=24))
+    pol_zen=ft.Checkbox(label="Женский пол", active_color="pink400", width=300, height=30,label_style=ft.TextStyle(color="pink600",size=24))
+
+    txt_nickname = ft.TextField(value="", hint_text="Никнейм",  width=300, height=50)
+    txt_name = ft.TextField(value="", hint_text="Имя", width=300, height=50)
+    txt_second_name = ft.TextField(value="", hint_text="Фамилия", width=300, height=50)
+    txt_city = ft.TextField(value="", hint_text="Город", width=300, height=50)
+    txt_age = ft.TextField(value="", hint_text="Возраст", width=300, height=50)
+    txt_pasword = ft.TextField(value="", hint_text="Пароль", width=300, height=50)
+    txt_check_nickname = ft.TextField(value="", hint_text="Никнейм", width=300, height=50)
+    txt_check_pasword = ft.TextField(value="", hint_text="Пароль", width=300, height=50)
+
+    regist = ft.ElevatedButton(text="Регистрация", width=300, height=40,on_click=Glav_page.button_clicked_start_registration)
+    login = ft.ElevatedButton(text="Вход", width=300, height=40, on_click=Glav_page.button_clicked_start_entry)
+    close = ft.ElevatedButton(text="Закрыть", width=300, height=40, color="white", bgcolor="red360",on_click=Glav_page.button_clicked_start_close)
+
+    hom = ft.ElevatedButton(text="Назад", width=300, height=50, on_click=Glav_page.home)
+
+    enter1 = ft.ElevatedButton(text= "Зарегистрироваться", width=300, height=50, on_click=Glav_page.enter1)
+    enter2 = ft.ElevatedButton(text="Войти", width=300, height=50, on_click=Glav_page.enter2)
+
+    regist_text = ft.Text(value='Регистрация', size=25, color="blue600")
+    entry_text = ft.Text(value='Вход', size=25, color="blue600")
+
 
     Glav_page.obnov_donatov(1)
 
-    page.add(ft.Column([name_of_the_shelter, user, admin, dogs_list, list_dogs]))
+    page.add(ft.Column([name_of_the_shelter,
+                        regist_text,
+                        regist,login,close,
+                        txt_nickname,txt_name,
+                        txt_second_name,txt_city,
+                        txt_age,txt_pasword,
+                        enter1,
+                        entry_text,
+                        txt_check_nickname,txt_check_pasword,
+                        enter2, hom,
+                        user, admin, dogs_list, list_dogs]))
     Dog.creat_dogs_list(1)
     page.add(ft.Column([walk, walk_donation]))
     Dog.creat_w_dogs_list(1)
