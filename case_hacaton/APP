@@ -22,9 +22,6 @@ def main(page: ft.Page):
         with open("file2.txt", "a") as file:
             file.write(f"{r}" + "\n")
 
-
-
-
     db = sqlite3.connect('Dogs.data')
     cur = db.cursor()
     cur.execute("""CREATE TABLE IF NOT EXISTS doges ( 
