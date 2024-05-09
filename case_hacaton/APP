@@ -68,6 +68,8 @@ def main(page: ft.Page):
     page.update()
     global money1
     global money2
+    global dog_pol
+    dog_pol=""
     money1 = 0
     money2 = 0
 
@@ -484,6 +486,8 @@ def main(page: ft.Page):
             adopt.visible = True
 
         def glav_page_adm(self):
+            pol_muz.visible = True
+            pol_zen.visible = True
             new_dog_foto.visible = True
             med_money.visible = True
             get_med_money.visible = True
@@ -495,7 +499,6 @@ def main(page: ft.Page):
             add_new_dog.visible = True
             new_dog_age.visible = True
             new_dog_paroda.visible = True
-            new_dog_pol.visible = True
             new_dog_opis.visible = True
             del_dog.visible = True
             add_del_dog.visible = True
@@ -504,6 +507,8 @@ def main(page: ft.Page):
 
 
         def del1(self):
+            pol_muz.visible = False
+            pol_zen.visible = False
             walk_ok_text.visible = False
             guardianship_ok_text.visible = False
             adopt_ok_text.visible = False
@@ -542,7 +547,6 @@ def main(page: ft.Page):
             med_donation.visible=False
             new_dog_age.visible=False
             new_dog_paroda.visible=False
-            new_dog_pol.visible=False
             new_dog_opis.visible=False
             new_dog_name.visible=False
             add_new_dog.visible=False
@@ -561,8 +565,9 @@ def main(page: ft.Page):
             del_dog.value = ""
             new_dog_age.value = ""
             new_dog_paroda.value = ""
-            new_dog_pol.value = ""
             new_dog_opis.value = ""
+            pol_muz.value=False
+            pol_zen.value = False
             Glav_page.del1(e)
             admin.visible = True
             user.visible = True
@@ -654,6 +659,20 @@ def main(page: ft.Page):
             page.update()
 
         def add_dog_to_table(self):
+            dog_pol=""
+            if pol_muz.value==True:
+                print(1)
+                dog_pol="Мужской"
+            elif pol_zen.value==True:
+                print(2)
+                dog_pol="Женский"
+            elif pol_zen.value==True and pol_muz.value==True:
+                print(00)
+                return None
+            else:
+                print(0)
+                pass
+
             db1 = sqlite3.connect('Walk_Dogs.data')
             cur1 = db1.cursor()
             db2 = sqlite3.connect('Adopt_Dogs.data')
@@ -673,7 +692,7 @@ def main(page: ft.Page):
             db = sqlite3.connect('Dogs.data')
             cur = db.cursor()
             cur.execute(f"INSERT INTO doges VALUES('{new_dog_name.value}', '{int(new_dog_age.value)}', '{new_dog_paroda.value}',"
-                        f" '{new_dog_pol.value}', '{new_dog_opis.value}', '{new_dog_foto.value}')")
+                        f" '{dog_pol}', '{new_dog_opis.value}', '{new_dog_foto.value}')")
             cur1.execute(f"INSERT OR IGNORE INTO w_doges VALUES('{new_dog_name.value}')")
             cur2.execute(f"INSERT OR IGNORE INTO a_doges VALUES('{new_dog_name.value}')")
             cur3.execute(f"INSERT OR IGNORE INTO g_doges VALUES('{new_dog_name.value}')")
@@ -684,7 +703,7 @@ def main(page: ft.Page):
             db = sqlite3.connect('Dogs.Data')
             cur = db.cursor()
             cur.execute(f"SELECT * FROM doges WHERE name ='{new_dog_name.value}' AND age = '{int(new_dog_age.value)}' "
-                        f"AND paroda = '{new_dog_paroda.value}' AND pol = '{new_dog_pol.value}' "
+                        f"AND paroda = '{new_dog_paroda.value}' AND pol = '{dog_pol}' "
                         f"AND pis = '{new_dog_opis.value}' AND foto = '{new_dog_foto.value}'")
             print(cur.fetchone())
             db.close()
@@ -753,14 +772,14 @@ def main(page: ft.Page):
             db.close()
             page.update()
 
-
             new_dog_name.value = ""
             del_dog.value = ""
             new_dog_age.value = ""
             new_dog_paroda.value = ""
-            new_dog_pol.value = ""
             new_dog_opis.value = ""
             new_dog_foto.value = ""
+            pol_muz.value=False
+            pol_zen.value = False
         def add_dog(self):
             Dog.add_dog_to_table(1)
             page.update()
@@ -868,7 +887,6 @@ def main(page: ft.Page):
             del_dog.value = ""
             new_dog_age.value = ""
             new_dog_paroda.value = ""
-            new_dog_pol.value = ""
             new_dog_opis.value = ""
             page.update()
             pass
@@ -966,7 +984,6 @@ def main(page: ft.Page):
     new_dog_name = ft.TextField(value="", hint_text="Имя собаки", width=300)
     new_dog_age = ft.TextField(value="", hint_text="Возраст собаки", width=300)
     new_dog_paroda = ft.TextField(value="", hint_text="Порода собаки", width=300)
-    new_dog_pol = ft.TextField(value="", hint_text="Пол собаки", width=300)
     new_dog_opis = ft.TextField(value="", hint_text="Краткое описание", width=300)
     new_dog_foto = ft.TextField(value="", hint_text="Фотография (URL ссылка)", width=300)
     add_new_dog = ft.ElevatedButton(text="Добавить новую собаку в список", width=300, height=50, on_click=Dog.add_dog)
@@ -1003,6 +1020,9 @@ def main(page: ft.Page):
     guardianship = ft.ElevatedButton(text="Стать опекуном подопечного", width=300, height=50, on_click=Glav_page.add_guardianship, on_long_press=Glav_page.del_guardianship)
     adopt = ft.ElevatedButton(text="Усыновить подопечного", width=300, height=50, on_click=Glav_page.add_adopt, on_long_press=Glav_page.del_adopt)
 
+    pol_muz=ft.Checkbox(label="Мужской пол", active_color="blue400",width=300, height=30,label_style=ft.TextStyle(color="blue600",size=24,weight=ft.FontWeight.BOLD))
+    pol_zen=ft.Checkbox(label="Женский пол", active_color="pink400", width=300, height=30,label_style=ft.TextStyle(color="pink600",size=24,weight=ft.FontWeight.BOLD))
+
     Glav_page.obnov_donatov(1)
 
     page.add(ft.Column([name_of_the_shelter, user, admin, dogs_list, list_dogs]))
@@ -1018,7 +1038,8 @@ def main(page: ft.Page):
                         adopt, adopt_donation]))
     Dog.creat_a_dogs_list(1)
     page.add(ft.Column([adopt_donation_button,
-                        dog_new, new_dog_name,new_dog_age,new_dog_paroda,new_dog_pol, new_dog_opis,new_dog_foto,
+                        dog_new, new_dog_name,new_dog_age,new_dog_paroda,
+                        pol_muz, pol_zen, new_dog_opis,new_dog_foto,
                         add_new_dog, dog_del, del_dog, add_del_dog,vozvrat, vozvrat_walk,vozvrat_walk_name, walk_vozvrat_button,
                         vozvrat_guardianship,vozvrat_guardianship_name,guardianship_vozvrat_button,
                         back, walk_ok_text, guardianship_ok_text, adopt_ok_text,vozvrat_walk_ok_text,vozvrat_guardianship_ok_text,ok_button]))
