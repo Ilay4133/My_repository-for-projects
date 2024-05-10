@@ -5,9 +5,13 @@ import sys
 def main(page: ft.Page):
     open("file1.txt", "a").close()
     open("file2.txt", "a").close()
+    global name
     global ruw
+    global rew
+    rew=""
     ruw=0
     r=0
+    name=""
 
     with open("file2.txt") as f:
         lines = f.readlines()
@@ -22,9 +26,6 @@ def main(page: ft.Page):
 
         with open("file2.txt", "a") as file:
             file.write(f"{r}" + "\n")
-
-
-
 
     db = sqlite3.connect('Dogs.data')
     cur = db.cursor()
@@ -70,6 +71,8 @@ def main(page: ft.Page):
     global money1
     global money2
     global dog_pol
+    global names
+    names = ""
     dog_pol=""
     money1 = 0
     money2 = 0
@@ -78,10 +81,32 @@ def main(page: ft.Page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     e=1
 
-
-
-
     class User:
+        def lich_kab_open(self):
+            Glav_page.del1(1)
+            acc_info.visible=True
+            backes.visible=True
+            page.update()
+            pass
+
+        def lich_kab_info(self):
+            rew=""
+            nick_name_="Ник: "
+            name_="Имя: "
+            sec_name_ = "Фамилия: "
+            age_ = "Возраст: "
+            pass_ = "Пароль: "
+            name = txt_check_nickname.value
+            db = sqlite3.connect('Users_file.Data')
+            cur = db.cursor()
+            cur.execute(f"SELECT nickname,name,second_name,age,password FROM users")
+            for row in cur.fetchall():
+                if str(row[0]) == name:
+                    rew = f"{rew + nick_name_ +str(row[0])}\n" + f"{name_+str(row[1])}\n" + f"{sec_name_+str(row[2])}\n" + f"{age_+str(row[3])}\n" + f"{pass_+str(row[4])}\n"
+                    acc_info.value = rew
+                    print(rew)
+                else:
+                    pass
         def registration_new_user(self):
             db = sqlite3.connect('Users_file.Data')
             cur = db.cursor()
@@ -105,15 +130,13 @@ def main(page: ft.Page):
             cur = db.cursor()
             cur.execute(
                 f"SELECT * FROM users WHERE nickname ='{txt_check_nickname.value}' AND password = '{txt_check_pasword.value}'")
+            User.lich_kab_info(1)
             if cur.fetchone() != None:
                 if txt_check_nickname.value == admin and txt_check_pasword.value == admin_pasword:
-                    print(3)
                     return 3
                 else:
-                    print(2)
                     return 2
             else:
-                print(3)
                 return 0
             db.commit()
             db.close()
@@ -136,9 +159,16 @@ def main(page: ft.Page):
         global money1
         global money2
 
-        def enter1(self):
+        def close_acc(self):
+            Glav_page.del1(1)
+            Glav_page.home(1)
+
+
+        def enter1(self): 
             User.registration_new_user(1)
             Glav_page.regist_window_close(1)
+            regist_enter_text.visible=True
+            enter3.visible=True
             page.update()
 
         def enter2(self):
@@ -161,6 +191,9 @@ def main(page: ft.Page):
             txt_pasword.visible = False
             enter1.visible = False
             hom.visible = False
+            # login.visible=True
+            # regist.visible = True
+            # close.visible = True
             page.update()
 
         def entry_window_close(self):
@@ -169,6 +202,7 @@ def main(page: ft.Page):
             txt_check_pasword.visible = False
             enter2.visible = False
             hom.visible = False
+
             page.update()
 
         def regist_window_open(self):
@@ -191,8 +225,21 @@ def main(page: ft.Page):
             hom.visible = True
             page.update()
 
-
         def home(self):
+            acc_info.visible=False
+            backes.visible=False
+            regist_enter_text.visible = False
+            enter3.visible = False
+            enter4.visible = False
+            enter5.visible = False
+            txt_nickname.value=""
+            txt_name.value=""
+            txt_second_name.value=""
+            txt_city.value=""
+            txt_age.value=""
+            txt_pasword.value=""
+            txt_check_nickname.value=""
+            txt_check_pasword.value=""
             Glav_page.regist_window_close(1)
             Glav_page.entry_window_close(1)
             regist.visible = True
@@ -635,6 +682,12 @@ def main(page: ft.Page):
 
 
         def del1(self):
+            acc_info.visible = False
+            backes.visible = False
+            enter3.visible = False
+            enter4.visible = False
+            enter5.visible = False
+            regist_enter_text.visible = False
             entry_text.visible = False
             regist_text.visible = False
             hom.visible = False
@@ -702,6 +755,14 @@ def main(page: ft.Page):
             page.update()
 
         def back(self):
+            txt_nickname.value=""
+            txt_name.value=""
+            txt_second_name.value=""
+            txt_city.value=""
+            txt_age.value=""
+            txt_pasword.value=""
+            txt_check_nickname.value=""
+            txt_check_pasword.value=""
             new_dog_name.value=""
             del_dog.value = ""
             new_dog_age.value = ""
@@ -713,6 +774,9 @@ def main(page: ft.Page):
             admin.visible = True
             user.visible = True
             back.visible=False
+            login.visible=True
+            regist.visible=True
+            close.visible=True
             page.update()
 
         def obnov_donatov(self):
@@ -1178,17 +1242,36 @@ def main(page: ft.Page):
     close = ft.ElevatedButton(text="Закрыть", width=300, height=40, color="white", bgcolor="red360",on_click=Glav_page.button_clicked_start_close)
 
     hom = ft.ElevatedButton(text="Назад", width=300, height=50, on_click=Glav_page.home)
+    enter3 = ft.ElevatedButton(text="ОК", width=300, height=50, on_click=Glav_page.home)
 
     enter1 = ft.ElevatedButton(text= "Зарегистрироваться", width=300, height=50, on_click=Glav_page.enter1)
     enter2 = ft.ElevatedButton(text="Войти", width=300, height=50, on_click=Glav_page.enter2)
+    enter4 = ft.ElevatedButton(text="ОК", width=300, height=50,)
+    enter5 = ft.ElevatedButton(text="ОК", width=300, height=50,)
+    backes=ft.ElevatedButton(text="Назад",width=300, height=50, on_click=Glav_page.home)
 
     regist_text = ft.Text(value='Регистрация', size=25, color="blue600")
     entry_text = ft.Text(value='Вход', size=25, color="blue600")
+    regist_enter_text = ft.Text(value="Вы зарегистрировались", size=25, color="blue600")
 
+    acc_info = ft.Text(value=rew, size=25, color="blue600")
+    acc_icon=ft.Icon(name=ft.icons.ACCOUNT_CIRCLE_OUTLINED,color="blue300",size=45,tooltip="Аккаунт",)
+
+    pb = ft.PopupMenuButton(items=[
+            ft.PopupMenuItem(icon=ft.icons.ACCOUNT_CIRCLE_OUTLINED, text="Аккаунт"),
+            ft.PopupMenuItem(),
+            ft.PopupMenuItem(icon=ft.icons.ACCOUNT_BALANCE_OUTLINED, text="Личный кабинет", on_click=User.lich_kab_open),
+            ft.PopupMenuItem(content=ft.Row([ft.Icon(ft.icons.NO_ACCOUNTS_OUTLINED),ft.Text("Выход из аккаунта")]),on_click=Glav_page.close_acc),])
 
     Glav_page.obnov_donatov(1)
 
-    page.add(ft.Column([name_of_the_shelter,
+
+
+    page.add(ft.Row([name_of_the_shelter,acc_icon,pb]))
+    page.add(ft.Column([regist_enter_text,
+                        acc_info,
+                        backes,
+                        enter3,enter4,enter5,
                         regist_text,
                         regist,login,close,
                         txt_nickname,txt_name,
@@ -1198,7 +1281,8 @@ def main(page: ft.Page):
                         entry_text,
                         txt_check_nickname,txt_check_pasword,
                         enter2, hom,
-                        user, admin, dogs_list, list_dogs]))
+                        #user, admin,
+                        dogs_list, list_dogs]))
     Dog.creat_dogs_list(1)
     page.add(ft.Column([walk, walk_donation]))
     Dog.creat_w_dogs_list(1)
