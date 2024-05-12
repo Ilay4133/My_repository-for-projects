@@ -723,6 +723,7 @@ def main(page: ft.Page):
 
         def glav_page_adm(self):
             pb.visible = True
+            dogs_list.visible = True
             donations_value_but.visible = True
             add_new_dog_but.visible = True
             del_dog_but.visible = True
