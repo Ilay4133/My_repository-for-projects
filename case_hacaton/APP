@@ -723,26 +723,11 @@ def main(page: ft.Page):
 
         def glav_page_adm(self):
             pb.visible = True
-            pol_muz.visible = True
-            pol_zen.visible = True
-            new_dog_foto.visible = True
-            med_money.visible = True
-            get_med_money.visible = True
-            feed_money.visible = True
-            get_feed_gramm.visible = True
             donations_value_but.visible = True
             add_new_dog_but.visible = True
             del_dog_but.visible = True
-            new_dog_name.visible = True
-            add_new_dog.visible = True
-            new_dog_age.visible = True
-            new_dog_paroda.visible = True
-            new_dog_opis.visible = True
-            del_dog.visible = True
-            add_del_dog.visible = True
             back.visible = True
             page.update()
-
 
         def del1(self):
             pb.visible=False
