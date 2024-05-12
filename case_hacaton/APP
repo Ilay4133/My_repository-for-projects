@@ -72,6 +72,8 @@ def main(page: ft.Page):
     global money2
     global dog_pol
     global names
+    global chek
+    chek = ""
     names = ""
     dog_pol=""
     money1 = 0
@@ -124,6 +126,7 @@ def main(page: ft.Page):
             db.close()
 
         def entry_user1(self):
+            chek=""
             admin = "Ilay"
             admin_pasword = "1111"
             db = sqlite3.connect('Users_file.Data')
@@ -131,6 +134,8 @@ def main(page: ft.Page):
             cur.execute(
                 f"SELECT * FROM users WHERE nickname ='{txt_check_nickname.value}' AND password = '{txt_check_pasword.value}'")
             User.lich_kab_info(1)
+            chek=txt_check_nickname.value
+            print(chek)
             if cur.fetchone() != None:
                 if txt_check_nickname.value == admin and txt_check_pasword.value == admin_pasword:
                     return 3
@@ -159,10 +164,65 @@ def main(page: ft.Page):
         global money1
         global money2
 
+        def open_donat(self):
+            med_money.visible=True
+            feed_money.visible=True
+            get_med_money.visible=True
+            get_feed_gramm.visible=True
+            page.update()
+
+        def close_donat(self):
+            med_money.visible = False
+            feed_money.visible = False
+            get_med_money.visible = False
+            get_feed_gramm.visible = False
+            page.update()
+
+        def open_add_menu(self):
+            pol_muz.visible=True
+            pol_zen.visible=True
+            new_dog_name.visible=True
+            new_dog_age.visible=True
+            new_dog_paroda.visible=True
+            new_dog_opis.visible=True
+            new_dog_foto.visible=True
+            add_new_dog.visible=True
+            page.update()
+
+        def close_add_menu(self):
+            pol_muz.visible = False
+            pol_zen.visible = False
+            new_dog_name.visible = False
+            new_dog_age.visible = False
+            new_dog_paroda.visible = False
+            new_dog_opis.visible = False
+            new_dog_foto.visible = False
+            add_new_dog.visible = False
+            page.update()
+
+        def open_del_menu(self):
+            del_dog.visible=True
+            add_del_dog.visible=True
+            page.update()
+
+        def close_del_menu(self):
+            del_dog.visible = False
+            add_del_dog.visible = False
+            page.update()
+
+        def vozvrat_acc(self):
+            if txt_check_nickname.value=="Ilay":
+                Glav_page.del1(1)
+                Glav_page.glav_page_adm(1)
+                page.update()
+            else:
+                Glav_page.del1(1)
+                Glav_page.glav_page_us(1)
+                page.update()
+
         def close_acc(self):
             Glav_page.del1(1)
             Glav_page.home(1)
-
 
         def enter1(self): 
             User.registration_new_user(1)
@@ -651,6 +711,7 @@ def main(page: ft.Page):
             page.update()
 
         def glav_page_us(self):
+            pb.visible = True
             vozvrat.visible = True
             dogs_list.visible = True
             back.visible = True
@@ -661,6 +722,7 @@ def main(page: ft.Page):
             adopt.visible = True
 
         def glav_page_adm(self):
+            pb.visible = True
             pol_muz.visible = True
             pol_zen.visible = True
             new_dog_foto.visible = True
@@ -668,8 +730,9 @@ def main(page: ft.Page):
             get_med_money.visible = True
             feed_money.visible = True
             get_feed_gramm.visible = True
-            dog_del.visible = True
-            dog_new.visible = True
+            donations_value_but.visible = True
+            add_new_dog_but.visible = True
+            del_dog_but.visible = True
             new_dog_name.visible = True
             add_new_dog.visible = True
             new_dog_age.visible = True
@@ -682,6 +745,7 @@ def main(page: ft.Page):
 
 
         def del1(self):
+            pb.visible=False
             acc_info.visible = False
             backes.visible = False
             enter3.visible = False
@@ -735,8 +799,9 @@ def main(page: ft.Page):
             adopt_donation.visible=False
             feed_donation_button.visible=False
             med_donation_button.visible=False
-            dog_del.visible=False
-            dog_new.visible=False
+            donations_value_but.visible=False
+            add_new_dog_but.visible=False
+            del_dog_but.visible=False
             feed_donation.visible=False
             med_donation.visible=False
             new_dog_age.visible=False
@@ -1202,8 +1267,6 @@ def main(page: ft.Page):
     vozvrat_guardianship_ok_text = ft.Text(value=f'Вы подали заявку на возврат {vozvrat_guardianship_name.value} после опекунства', size=25, color="blue600")
 
     name_of_the_shelter = ft.Text(value='Приют "Добрые руки" ', size=30, color="blue600", weight=ft.FontWeight.W_500)
-    dog_new = ft.Text(value='Добавление собаки в список', size=25, color="blue600")
-    dog_del = ft.Text(value='Удаление собаки из списка', size=25, color="blue600")
     list_dogs = ft.Text(value='Собаки:', size=25, color="blue600")
     med_money = ft.Text(value='Пожертвовано на медицину:', size=25, color="blue600")
     feed_money = ft.Text(value='Пожертвовано на корм:', size=25, color="blue600")
@@ -1248,7 +1311,7 @@ def main(page: ft.Page):
     enter2 = ft.ElevatedButton(text="Войти", width=300, height=50, on_click=Glav_page.enter2)
     enter4 = ft.ElevatedButton(text="ОК", width=300, height=50,)
     enter5 = ft.ElevatedButton(text="ОК", width=300, height=50,)
-    backes=ft.ElevatedButton(text="Назад",width=300, height=50, on_click=Glav_page.home)
+    backes=ft.ElevatedButton(text="Назад",width=300, height=50, on_click=Glav_page.vozvrat_acc)
 
     regist_text = ft.Text(value='Регистрация', size=25, color="blue600")
     entry_text = ft.Text(value='Вход', size=25, color="blue600")
@@ -1262,6 +1325,10 @@ def main(page: ft.Page):
             ft.PopupMenuItem(),
             ft.PopupMenuItem(icon=ft.icons.ACCOUNT_BALANCE_OUTLINED, text="Личный кабинет", on_click=User.lich_kab_open),
             ft.PopupMenuItem(content=ft.Row([ft.Icon(ft.icons.NO_ACCOUNTS_OUTLINED),ft.Text("Выход из аккаунта")]),on_click=Glav_page.close_acc),])
+
+    donations_value_but = ft.ElevatedButton(text="Пожертвования", width=300, height=50, on_click=Glav_page.open_donat,on_long_press=Glav_page.close_donat)
+    add_new_dog_but=ft.ElevatedButton(text="Добавление новвой собаки", width=300, height=50, on_click=Glav_page.open_add_menu,on_long_press=Glav_page.close_add_menu)
+    del_dog_but = ft.ElevatedButton(text="Удаление собаки", width=300, height=50, on_click=Glav_page.open_del_menu,on_long_press=Glav_page.close_del_menu)
 
     Glav_page.obnov_donatov(1)
 
@@ -1287,6 +1354,7 @@ def main(page: ft.Page):
     page.add(ft.Column([walk, walk_donation]))
     Dog.creat_w_dogs_list(1)
     page.add(ft.Column([walk_donation_button,
+                        donations_value_but,
                         feed, feed_money, get_feed_gramm, feed_donation, feed_donation_button,
                         medicines, med_money, get_med_money, med_donation, med_donation_button,
                         guardianship,guardianship_donation]))
@@ -1295,9 +1363,9 @@ def main(page: ft.Page):
                         adopt, adopt_donation]))
     Dog.creat_a_dogs_list(1)
     page.add(ft.Column([adopt_donation_button,
-                        dog_new, new_dog_name,new_dog_age,new_dog_paroda,
+                        add_new_dog_but, new_dog_name,new_dog_age,new_dog_paroda,
                         pol_muz, pol_zen, new_dog_opis,new_dog_foto,
-                        add_new_dog, dog_del, del_dog, add_del_dog,vozvrat, vozvrat_walk,vozvrat_walk_name, walk_vozvrat_button,
+                        add_new_dog, del_dog_but, del_dog, add_del_dog,vozvrat, vozvrat_walk,vozvrat_walk_name, walk_vozvrat_button,
                         vozvrat_guardianship,vozvrat_guardianship_name,guardianship_vozvrat_button,
                         back, walk_ok_text, guardianship_ok_text, adopt_ok_text,vozvrat_walk_ok_text,vozvrat_guardianship_ok_text,ok_button]))
     Glav_page.del1(e)
